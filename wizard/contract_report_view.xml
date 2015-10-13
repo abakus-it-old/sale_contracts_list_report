@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_contract_list_report_wizard" model="ir.ui.view">
+            <field name="name">Contract List Report</field>
+            <field name="model">contract.list.report</field>
+            <field name="arch" type="xml">
+                <form string="Contract list">
+                    <group string="Data selection">
+                        <field name="contract_type_id"/>
+                        <field name="company_id"/>
+                    </group>
+                    <group string="Options">
+                        <field name="landscape"/>
+                    </group>                    
+                    <footer>
+                        <button name="get_report" string="Download Report" type="object" class="oe_highlight" />
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_contract_list_report" model="ir.actions.act_window">
+            <field name="name">Contract List Report</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">contract.list.report</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_contract_list_report_wizard"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem
+            name="Contracts list report"
+            parent="crm.root_menu"
+            action="action_contract_list_report"
+            id="sale_contracts_list_report.list_report"/>
+    </data>
+</openerp>
