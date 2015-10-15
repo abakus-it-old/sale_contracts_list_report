@@ -29,10 +29,12 @@ class employee_measurability(osv.osv_memory):
 
         accounts = []
         for contract in account_analytic_account_obj.browse(cr, uid, account_analytic_account_ids):
-            
-            accounts.append({'name': contract.name, 'partner_id': contract.partner_id.name, 'code': contract.code, 'date_start': contract.date_start, 'date_end': contract.date, 'description': contract.description, 'state': contract.state})
+            contract_dict = {'name': contract.name, 'partner_id': contract.partner_id.name, 'code': contract.code, 'date_start': contract.date_start, 'date_end': contract.date, 'description': contract.description, 'state': contract.state}
+            #_logger.debug("contract : %s\n", contract_dict)
+            accounts.append(contract_dict)
 
-        contracts = {'accounts':accounts,}
+        contracts = {'accounts': accounts,}
+        _logger.debug('contracts : %s', contracts)
         return contracts
 
     def get_report(self, cr, uid, ids, context=None):
@@ -62,3 +64,16 @@ class employee_measurability(osv.osv_memory):
              'form': data,
         }
         return self.pool['report'].get_action(cr, uid, [], 'sale_contracts_list_report.contract_list_report_document', data=datas, context=context)
+
+class sale_contracts_report_print(report_sxw.rml_parse):
+    def __init__(self, cr, uid, name, context):
+        super(sale_contracts_report_print, self).__init__(cr, uid, name, context=context)
+        self.localcontext.update({
+
+        })
+
+class wrapped_sale_contracts_report_print(osv.AbstractModel):
+    _name = 'report.sale_contracts_list_report.contract_list_report_document'
+    _inherit = 'report.abstract_report'
+    _template = 'sale_contracts_list_report.contract_list_report_document'
+    _wrapped_report_class = sale_contracts_report_print

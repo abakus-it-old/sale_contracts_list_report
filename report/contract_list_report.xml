@@ -18,8 +18,8 @@
                             <div class="page">
                                 <div class="oe_structure" />    
                                 <h1>Contracts list</h1>
-                                <h2>Type : <span t-esc="doc.contract_type_id" /></h2>
-                                <h2>Company : <span t-esc="doc.company_id" /></h2>
+                                <h2>Type : <span t-esc="doc.contract_type_id.name" /></h2>
+                                <h2>Company : <span t-esc="doc.company_id.name" /></h2>
                                 <table class="table table-condensed table-bordered">
                                     <tr>
                                         <th>Name</th>
@@ -32,13 +32,14 @@
                                     </tr>
                                     <t t-foreach="data['form']['accounts']" t-as="contract">
                                         <tr>
-                                            <td><span t-esc="contract.name" /></td>
-                                            <td><span t-esc="contract.partner_id" /></td>
-                                            <td><span t-esc="contract.code" /></td>
-                                            <td><span t-esc="contract.date_start" /></td>
-                                            <td><span t-esc="contract.date_end" /></td>
-                                            <td><span t-esc="contract.description" /></td>
-                                            <td><span t-esc="contract.state" /></td>
+
+                                            <td><span t-esc="contract['name']" /></td>
+                                            <td><span t-esc="contract['partner_id']" /></td>
+                                            <td><span t-esc="contract['code']" /></td>
+                                            <td><span t-esc="contract['date_start']" /></td>
+                                            <td><span t-esc="contract['date_end']" /></td>
+                                            <td><span t-esc="contract['description']" /></td>
+                                            <td><span t-esc="contract['state']" /></td>
                                         </tr>
                                     </t>
                                     <tr>
