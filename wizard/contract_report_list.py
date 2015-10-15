@@ -11,7 +11,7 @@ class employee_measurability(osv.osv_memory):
     
     _columns = {
         'contract_type_id': fields.many2one('account.analytic.account.type', string='Type', required=True),
-        'company_id': fields.many2one('res.company', string="Company", store=False),
+        'company_id': fields.many2one('res.company', string="Company", store=False, default=lambda self: self.env.user.company_id),
         'landscape': fields.boolean('Landscape', default=True),
     }
     
@@ -30,11 +30,9 @@ class employee_measurability(osv.osv_memory):
         accounts = []
         for contract in account_analytic_account_obj.browse(cr, uid, account_analytic_account_ids):
             contract_dict = {'name': contract.name, 'partner_id': contract.partner_id.name, 'code': contract.code, 'date_start': contract.date_start, 'date_end': contract.date, 'description': contract.description, 'state': contract.state}
-            #_logger.debug("contract : %s\n", contract_dict)
             accounts.append(contract_dict)
 
         contracts = {'accounts': accounts,}
-        _logger.debug('contracts : %s', contracts)
         return contracts
 
     def get_report(self, cr, uid, ids, context=None):
