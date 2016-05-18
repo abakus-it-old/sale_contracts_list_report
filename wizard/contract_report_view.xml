@@ -34,8 +34,9 @@
 
         <menuitem
             name="Contracts list report"
-            parent="crm.root_menu"
+            parent="sale_contract.menu_sale_subscription"
             action="action_contract_list_report"
-            id="sale_contracts_list_report.list_report"/>
+            id="sale_contracts_list_report.list_report"
+            sequence="65"/>
     </data>
 </openerp>

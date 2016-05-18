@@ -10,7 +10,7 @@ class employee_measurability(osv.osv_memory):
     _name = "contract.list.report"
     
     _columns = {
-        'contract_type_id': fields.many2one('account.analytic.account.type', string='Type', required=True),
+        'contract_type_id': fields.many2one('sale.subscription.type', string='Type', required=True),
         'company_id': fields.many2one('res.company', string="Company", store=False, default=lambda self: self.env.user.company_id),
         'landscape': fields.boolean('Landscape', default=True),
     }
@@ -20,7 +20,7 @@ class employee_measurability(osv.osv_memory):
         # Get all the contracts that have the desired type for the desired company
         wiz_data = self.browse(cr, uid, ids[0], context=context)
         #contract object
-        account_analytic_account_obj = self.pool.get('account.analytic.account')
+        account_analytic_account_obj = self.pool.get('sale.subscription')
         account_analytic_account_ids = None
         if wiz_data.company_id:
             account_analytic_account_ids = account_analytic_account_obj.search(cr, uid, [('contract_type', '=', wiz_data.contract_type_id.id), ('state', '!=', 'cancelled'), ('state', '!=', 'close'), ('state', '!=', 'refused'), ('company_id', '=', wiz_data.company_id.id)])
