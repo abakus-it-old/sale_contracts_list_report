@@ -1,6 +1,6 @@
 {
     'name': "Sale Contracts : information report list",
-    'version': '1.0',
+    'version': '9.0.1.0',
     'depends': ['account_analytic_account_improvements'],
     'author': "AbAKUS it-solutions SARL",
     'website': "http://www.abakusitsolutions.eu",
